@@ -19,8 +19,9 @@ for (( i=1; i<=4; i++ ))
 do
 	Array[$i]=${ResultDictionary[result"$i"]}
 done
-
+echo "Dictionary keys:"
 echo ${!ResultDictionary[@]}
+echo "Dictionary Values:"
 echo ${ResultDictionary[@]}
 echo "Array Values:"
 echo ${Array[@]}
@@ -39,4 +40,7 @@ do
 	done
 done
 echo "After Sorting Array in Descending Order"
+echo ${Array[@]}
+Array=( $(printf "%s\n" ${Array[@]} | sort -n ) )
+echo "After Sorting in Ascending order"
 echo ${Array[@]}
