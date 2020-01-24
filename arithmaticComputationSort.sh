@@ -1,13 +1,20 @@
-#!/bin/bash -x
+#!/bin/bash
 echo "--------------------------------------WELLCOME TO ARITHMATIC COMPUTATON AND SORTING------------------------------------------"
+declare -A ResultDictionary
 read -p "Enter First Number:" a 
 read -p "Enter Second Number:" b
 read -p "Enter Third Number:" c
-result1=$(($a+$b*$c))
-result2=$(($a*$b+$c))
+
+result1=`echo "scale=2; $a+$b*$c" | bc`
+result2=`echo "scale=2; $a*$b+$c" | bc`
 result3=`echo "scale=2; $c+$a/$b" | bc`
-result4=$((($a%$b)+$c))
-echo "Arithmatic Operation result for number1+number2*number3 is:" $result1
-echo "Arithmatic Operation result for number1*number2+number3 is:" $result2
-echo "Arithmatic Operation result for number3+number1/number2 is:" $result3
-echo "Arithmatic Operation result for number1%number2+number3 is:" $result4
+result4=`echo "($a%$a)+$b" | bc`
+
+ResultDictionary[result1]=$result1
+ResultDictionary[result2]=$result2
+ResultDictionary[result3]=$result3
+ResultDictionary[result4]=$result4
+
+echo ${!ResultDictionary[@]}
+echo ${ResultDictionary[@]}
+
